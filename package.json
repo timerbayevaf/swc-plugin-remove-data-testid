@@ -1,0 +1,13 @@
+{
+  "name": "swc-plugin-remove-data-testid",
+  "version": "0.1.0",
+  "main": "index.js",
+  "files": [
+    "index.js",
+    "wasm/"
+  ],
+  "scripts": {
+    "build": "cargo build --release --target wasm32-wasi && mkdir -p wasm && cp target/wasm32-wasi/release/swc_plugin_remove_data_testid.wasm wasm/"
+  },
+  "devDependencies": {}
+}

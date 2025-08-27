@@ -1,0 +1,15 @@
+[package]
+name = "swc_plugin_remove_data_testid"
+version = "0.1.0"
+edition = "2025"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+swc_core = { version = "0.90.*", features = [
+  "ecma_plugin_transform",
+  "ecma_visit",
+  "ecma_ast",
+  "plugin_transform"
+] }
