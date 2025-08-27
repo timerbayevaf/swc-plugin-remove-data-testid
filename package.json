@@ -1,12 +1,18 @@
 {
   "name": "swc-plugin-remove-data-testid",
   "version": "0.1.0",
-  "main": "index.js",
-  "files": [
-    "index.js",
-    "wasm/"
-  ],
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
-    "build": "cargo build --release --target wasm32-unknown-unknown && mkdir -p wasm && cp target/wasm32-unknown-unknown/release/swc_plugin_remove_data_testid.wasm wasm/"
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "@rsbuild/core": "^1.0.0",
+    "@swc/core": "^1.3.0",
+    "typescript": "^5.2.2"
+  },
+  "peerDependency": {
+    "@swc/core": "^1.3.0",
+    "@rsbuild/core": "^1.0.0"
   }
 }
