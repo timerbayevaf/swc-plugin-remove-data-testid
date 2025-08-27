@@ -3,37 +3,28 @@ name: Build & Release
 on:
   push:
     tags:
-      - "v*" # example v1.0.0
+      - "v*"
 
 jobs:
-  build:
+  build-and-publish:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: "npm"
           registry-url: "https://registry.npmjs.org"
 
-      - name: Set up Rust
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          targets: wasm32-unknown-unknown
-          profile: minimal
+      - name: Install dependencies
+        run: npm install
 
-      - name: List installed Rust targets
-        run: rustup target list --installed
-
-      - name: Build Rust plugin
-        run: |
-          cargo clean
-          cargo build --release --target wasm32-unknown-unknown
-          mkdir -p wasm
-          cp target/wasm32-unknown-unknown/release/swc_plugin_remove_data_testid.wasm wasm/
+      - name: Build plugin
+        run: npm run build
 
       - name: Publish to npm
         run: npm publish --access public
